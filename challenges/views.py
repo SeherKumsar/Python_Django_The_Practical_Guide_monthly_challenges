@@ -3,13 +3,6 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 # url için Redirect
 from django.urls import reverse
 
-# Create your views here.
-# def january (request):
-#     return HttpResponse("This works! January")
-
-# # February
-# def february (request):
-#     return HttpResponse("This february response")
 
 monthly_challenges = {
     "january": "Eat no meat for entire month",
@@ -26,24 +19,37 @@ monthly_challenges = {
     "december": "Aralık",
 }
 
+# Create views
+
+def index(request):
+    list_items = ""
+    months = list(monthly_challenges.keys())
+
+    for month in months:
+        capitalized_month = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
+        list_items += f"<li><a href=\"{month_path}\">{capitalized_month}</a></li>"
+        # a href bağlantısı yazılırken tırnak hatası olmaması için \" \" kullanılır
+    # "<li><a href="...">January</a></li><li><a href="...">February</a></li>"
+    response_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data)
+
 
 def monthly_challenge_by_number(request, month):
     months = list(monthly_challenges.keys())
 
     if month > len(months):
-        return HttpResponseNotFound("Invalid month")
+        return HttpResponseNotFound("<h1>Invalid month</h1>")
 
     redirect_month = months[month - 1]
-    redirect_path = reverse("month-challenge", args=[redirect_month]) # /challenge/january
+    redirect_path = reverse("month-challenge", args=[redirect_month]) # /challenges/january
     return HttpResponseRedirect(redirect_month)
-    #return HttpResponseRedirect("/challenge/" + redirect_month)
-    # return HttpResponseRedirect("/challenges/" + redirect_month)
-    # return HttpResponse(month) # sadece integer sayıları döndürür
 
 
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return HttpResponse(challenge_text)
+        response_data = f"<h1>{challenge_text}</h1>"
+        return HttpResponse(response_data)
     except:
-        return HttpResponseNotFound("This month is not supported!")
+        return HttpResponseNotFound("<h1>This month is not supported!</h1>")
