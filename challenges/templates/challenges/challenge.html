@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block page_title%}
+    {{ month_name | title }} Challenge
+{% endblock %}
+
+{% block content %}
+    {% include "./includes/header.html" with active_page="challenge" %}
+    {% comment %} {% include "./includes/header.html" %} {% endcomment %}
+    {% comment %} {% include "challenges/includes/header.html" %} {% endcomment %}
+    <h1>{{ month_name|title }} Challenge</h1>
+    {% if text is not None %}
+        <h2>{{ text }}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet!</p>
+    {% endif %}
+{% endblock %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=1, initial-scale=1.0">
+        <title>{{ month_name | title }} Challenge</title>
+    </head> {% endcomment %}
+    {% comment %} <body> {% endcomment %}
+        {% comment %} <h1>{{ month_name | title }} Challenge</h1> {% endcomment %}
+        {% comment %} <h2>Go for a walk for at least 20 minutes every day</h2> {% endcomment %}
+        {% comment %} {% if text is not None%} {% endcomment %}
+            {% comment %} <h2>{{ text }}</h2> {% endcomment %}
+            {% comment %} {% elif %} {% endcomment %}
+        {% comment %} {% else %} {% endcomment %}
+            {% comment %} <p>There is no challenge for this month yet!</p> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
+    {% comment %} </body> {% endcomment %}
+{% comment %} </html> {% endcomment %}

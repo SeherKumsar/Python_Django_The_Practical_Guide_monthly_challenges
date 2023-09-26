@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% comment %} {% block page_title %}
+  All Challenges
+{% endblock %} {% endcomment %}
+
+{% block content %}
+    {% include "./includes/header.html" with active_page="index" %}
+    {% comment %} {% include "./includes/header.html" %} {% endcomment %}
+{% comment %} {% include "challenges/includes/header.html" %} {% endcomment %}
+  <ul>
+    {% for month in months %}
+      <li><a href="{% url "month-challenge" month %}">{{ month|title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+{% comment %} {% extends "../../../templates/base.html" %} {% endcomment %}
+{% comment %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1, initial-scale=1.0">
+    <title>All Challenges</title>
+</head>
+<body>
+    <ul>
+        {% for month in months %}
+            <li><a href="{% url "month-challenge" month %}">{{ month|title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html> 
+{% endcomment %}
