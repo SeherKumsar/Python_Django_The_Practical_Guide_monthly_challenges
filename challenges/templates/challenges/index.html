@@ -1,11 +1,20 @@
 {% extends "base.html" %}
-{% comment %} {% block page_title %}
+
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "challenges/challenges.css" %}">
+  <link rel="stylesheet" href="{% static "challenges/includes/header.css" %}">
+{% endblock %}
+
+{% comment %} {% endcomment %}
+{% block page_title %}
   All Challenges
-{% endblock %} {% endcomment %}
+{% endblock %}
+{% comment %} {% endcomment %}
 
 {% block content %}
-    {% include "./includes/header.html" with active_page="index" %}
-    {% comment %} {% include "./includes/header.html" %} {% endcomment %}
+    {% include "./includes/header.html" %}
 {% comment %} {% include "challenges/includes/header.html" %} {% endcomment %}
   <ul>
     {% for month in months %}
